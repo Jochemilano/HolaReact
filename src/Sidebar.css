@@ -1,0 +1,372 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+:root {
+    --color-bg: #EBECF2;
+    --color-surface: #FFFFFF;
+    --color-border: #9A9EB2;
+    --color-text-primary: #000;
+    --color-text-secondary: #3F435D;
+    --color-tooltip-bg: #2A2E33;
+    --color-tooltip-text: #fff;
+    --shadow-border: rgba(0, 0, 0, 0.1);
+    --user-bg-color: #FAFAFC;
+}
+.App.dark-mode{
+    /* Fondo general */
+    --color-bg: #1E1E2F;           /* gris oscuro para el body */
+    --color-surface: #2A2A3D;      /* color de la sidebar y tarjetas */
+    --color-border: #3A3A50;       /* bordes sutiles, contraste con surface */
+
+    /* Texto */
+    --color-text-primary: #EAEAEA;  /* texto principal claro */
+    --color-text-secondary: #A0A0B0; /* texto secundario más tenue */
+
+    /* Tooltip */
+    --color-tooltip-bg: #3A3A50;    /* tooltip oscuro */
+    --color-tooltip-text: #FFFFFF;  /* texto tooltip claro */
+
+    /* Sombras */
+    --shadow-border: rgba(0, 0, 0, 0.5); /* sombra más marcada en dark mode */
+
+    /* Usuario / perfil */
+    --user-bg-color: #252536;       /* fondo de sección usuario */
+}
+/*main*/
+main{
+    padding-left:16rem;
+    transition: padding 0.5s ease;
+}
+.sidebar.minimize + main{
+    padding-left: 5rem;
+}
+/*etc*/
+.girar180 i:last-child{
+    transform: rotate(180deg);
+}
+/* sidebar*/
+.sidebar{
+    z-index: 10;
+    position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 15rem;
+    height: 100%;
+    padding: 1.4rem 1rem 0 1rem;
+    background-color: var(--color-surface);
+    box-shadow: 1px 0px 10px var(--shadow-border);
+    transition: width 0.5s ease, padding 0.5s ease, transform 0.3s ease, color 0.5s ease, background-color 0.5s ease;
+}
+.minimize{
+    width: 4rem;
+}
+.sidebar-btn{
+    position: absolute;
+    top: 3.5%;
+    right: -1.87rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.75rem;
+    height: 1.75rem;
+    border-radius: 50%;
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    box-shadow: 2px 2px 5px var(--shadow-border);
+    cursor: pointer;
+    transition: right 0.3s ease, color 0.5s ease, background-color 0.5s ease;
+    z-index: 10;
+}
+.sidebar-btn i{
+    font-size: 1.5rem;
+    transition: transform 0.5s ease;
+}
+.sidebar.minimize .cuerpo,
+.sidebar.minimize .cuerpo:hover,
+.sidebar.minimize .item:hover,
+.sidebar.minimize .girar180{
+    overflow: visible;
+}
+.sidebar.minimize .item:hover span,
+.sidebar.minimize .girar180 span{
+    position: absolute;
+    left: 3.5rem;
+    padding: 0.5rem;
+    color:var(--color-tooltip-text);
+    background-color: var(--color-tooltip-bg);
+    border-radius: 0.4rem;
+    transition: all 0.3s ease;
+}
+/*brand*/
+.brand{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    gap:0.7rem;
+    margin-bottom: 1.8rem;
+    overflow: hidden;
+}
+.brand img{
+    width: 2rem;
+}
+.brand span{
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+/*Barra lateral*/
+.cuerpo{
+    width: 100%;
+    overflow-y:scroll;
+    scrollbar-width: none; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+}
+/*buscador*/
+.search{
+    display: flex;
+    margin-top: 5px;
+    width: 95%;
+    padding: 0.55rem 0;
+    margin-bottom: 1.2rem;
+    border-radius: 0.3rem;
+    box-shadow: 0 0 0 1px var(--color-border);
+    cursor: pointer;
+    transition: box-shadow 0.5s ease;
+}
+.search input{
+    width: 70%;
+    border: none;
+    outline: none;
+    color: var(--color-text-primary);
+    background-color: #00000000;
+}
+.search:hover{
+    box-shadow: 0 0 0 1px var(--color-text-primary);
+}
+.search i{
+    font: 1.35rem;
+    color: var(--color-text-secondary);
+    margin: 0 0.5rem;
+}
+/*item-container*/
+.item-container{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.item-container li {
+    list-style: none;
+}
+.item-container .item{
+    position: relative;
+    overflow: hidden;
+}
+.item-container .link{
+    align-items: center;
+    display: flex;
+    padding: 0.3rem 0;
+    color: var(--color-text-secondary);
+    text-decoration: none;
+    border-radius: 0.3rem;
+}
+.link:hover,
+.subitem:hover{
+    color: var(--color-text-primary);
+    background-color: var(--color-bg);
+}
+.link i{
+    margin: 0 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.7rem;
+    height: 1.7rem;
+    font-size: 1.35rem;
+}
+.link i:last-child{
+    margin-left: auto;
+    transition: 0.3s ease;
+}
+.link span{
+    font-weight: 500;
+}
+/*subitem*/
+.subitemcontainer{
+    text-align: left;
+    position: relative;
+    height: 0;
+    transition: height 0.3s ease, padding 0.3s ease;
+    overflow: hidden;
+    left: 0;
+}
+.sidebar.minimize .subitemcontainer {
+    position: absolute;
+    left: 3.5rem;
+    top: 2.8rem;
+    background-color: var(--color-surface);
+    border-radius: 0.2rem;
+}
+.subitem{
+    text-decoration: none;
+    display: flex;
+    margin-left: 2.4rem;
+    padding: 0.55rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    border-radius: 0.3rem;
+}
+.subitemcontainer::before{/*linea de decoracion cuando se ve un submenu*/
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 0.07rem;
+    margin-left: 1.4rem;
+    background-color: var(--color-border);
+}
+.sidebar.minimize .subitemcontainer::before{/*No linea cuando esta minimizado*/
+    width: 0;
+}
+.sidebar.minimize .subitemcontainer a{/* organizar sub items debajo del item*/
+    margin: 0 0.05rem;
+}
+.sidebar.minimize .link i:last-child{/*quitar esa flecha cunado esta minimizado*/
+    display: none;
+}
+/*encabezado*/
+.encabezado{
+    position: relative;
+    width: 100%;
+}
+/*footer*/
+.footer{
+    border:var(--color-border);
+    width: 100%;
+    padding: 1rem 0;
+    box-shadow: 0 -0.2rem 0 0 var(--shadow-border);
+}
+.user{
+    display: flex;
+    overflow: hidden;
+    margin-top: 1rem;
+    font-size: 0.6rem;
+}
+.user-img{
+    display: flex;
+    align-items: center;
+    margin: 0 0.7rem 0 0;
+    border-radius: 50%;
+}
+.user-img img{
+    width: 2rem;
+    height: 2rem;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.user-data{
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.user-data .name{
+    font-weight: 600;
+    color: var(--color-text-primary);
+}
+.user-data .email{
+    font-size: 0.7rem;
+    color:var(--color-text-secondary)
+}
+.user-data .rol{
+    font-size: 0.7rem;
+    color: var(--color-text-secondary);
+}
+.user-icon{
+    cursor: pointer;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-text-secondary);
+}
+/*Dark mode*/
+.dark-mode-btn{
+    position: absolute;
+    height: 2.4rem;
+    width: 2.4rem;
+    bottom: 2rem;
+    right: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-surface);
+    color: var(--color-text-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px 2px var(--shadow-border);
+    cursor: pointer;
+    overflow: hidden;
+    transition: color 0.5s ease, background-color 0.5s ease;
+}
+.dark-mode-btn i{
+    font-size: 1.5rem;
+    position: absolute;
+    transition: transform 0.3s ease-in;
+}
+.dark-mode-btn i:last-child{
+    transform: translateY(150%);
+}
+.App.dark-mode .dark-mode-btn i:last-child{
+    transform: translateY(0%);
+}
+.App.dark-mode .dark-mode-btn i:first-child{
+    transform: translateY(-150%);
+}
+/*boton responsivo*/
+#sidebar-btn2{
+    display: none;
+}
+/*Responsive*/
+@media (max-width:700px){
+    #sidebar-btn{
+        display: none;
+    }
+    .sidebar{
+        transform: translate(-100%);
+        transition: transform 0.3s ease;
+    }
+    #sidebar-btn2{
+        display: flex;
+        top: 0.5rem;
+        right: 0.5rem;
+        padding: 1.2rem;
+    }
+    #sidebar-btn2 i:last-child{
+        display: none;
+    }
+    body.sidebar-hidden .sidebar{
+        transform: translate(0);
+    }
+    body.sidebar-hidden #sidebar-btn2 i:last-child{
+        display: flex;
+    }
+    body.sidebar-hidden #sidebar-btn2 i:first-child{
+        display: none;
+    }
+    main{
+        padding:1rem;
+    }
+    .sidebar.minimize + main{
+        padding-left: 1rem;
+    }
+}
