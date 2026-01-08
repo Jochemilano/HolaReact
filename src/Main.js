@@ -132,18 +132,21 @@ const deleteNote = (index) => {
                   <button
                     className="view-btn"
                     onClick={() => setViewNote(note.text)}
+                    title="Ver"
                   >
                     👁
                   </button>
                   <button
                     className="edit-btn"
                     onClick={() => startEditing(index, note.text)}
+                    title="Editar"
                   >
                     ✎
                   </button>
                   <button
                     className="delete-btn"
                     onClick={() => confirmDeleteNote(index)}
+                    title="Mandar a papelera"
                   >
                     ✕
                   </button>

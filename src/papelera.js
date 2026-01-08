@@ -47,18 +47,21 @@ function Papelera() {
               <button
                 className="view-btn"
                 onClick={() => setViewNote(note.text)}
+                title="Ver"
               >
                 👁
               </button>
               <button
                 className="edit-btn"
                 onClick={() => recoverNote(index)}
+                title="Restaurar"
               >
                 ↻
               </button>
               <button
                 className="delete-btn"
                 onClick={() => deletePermanently(index)}
+                title="Eliminar definitivamente"
               >
                 ✕
               </button>
