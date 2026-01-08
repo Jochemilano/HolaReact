@@ -58,7 +58,7 @@ function Main() {
   return (
     <main className="Main">
       <header className="App-header">
-        <h1>Mi App de Notas</h1>
+        <h1>Tus notas</h1>
       </header>
 
       <div className="note-form">
@@ -96,8 +96,11 @@ function Main() {
             ) : (
               // Vista normal
               <>
-                <p>{note.text}</p>
+                <div className='note-text'>
+                  <p>{note.text}</p>
+                </div>
                 <div className="note-actions">
+                  
                   <button
                     className="edit-btn"
                     onClick={() => startEditing(index, note.text)}

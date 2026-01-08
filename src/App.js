@@ -1,21 +1,28 @@
+//App.js
 import React, { useState } from 'react';
 import './App.css';
 import './Sidebar.css';
 import Sidebar from './Sidebar';
-import SidebarButton from './SidebarButton';
 import DarkModeButton from './DarkModeButton';
 import Main from './Main';
+import Archivar from './archivar';
+
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(false);
 
   return (
-    <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
-      <Sidebar />
-      <SidebarButton />
-      <DarkModeButton isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
-      <Main />
-    </div>
+    <Router>
+      <div className={`App ${isDarkMode ? 'dark-mode' : ''}`}>
+        <Sidebar />
+          <Routes>
+            <Route path="/" element={<Main />} />
+            <Route path="/archive" element={<Archivar />} />
+          </Routes>
+          <DarkModeButton isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
+      </div>
+    </Router>
   );
 }
 

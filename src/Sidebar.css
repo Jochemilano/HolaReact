@@ -51,6 +51,8 @@ main{
 }
 /* sidebar*/
 .sidebar{
+    left:0;
+    top:0;
     z-index: 10;
     position: fixed;
     display: flex;
@@ -118,6 +120,7 @@ main{
 }
 .brand span{
     font-weight: 600;
+    font-size: 3rem;
     color: var(--color-text-primary);
 }
 /*Barra lateral*/
@@ -129,33 +132,6 @@ main{
     flex-direction: column;
     align-items: center;
     height: 100%;
-}
-/*buscador*/
-.search{
-    display: flex;
-    margin-top: 5px;
-    width: 95%;
-    padding: 0.55rem 0;
-    margin-bottom: 1.2rem;
-    border-radius: 0.3rem;
-    box-shadow: 0 0 0 1px var(--color-border);
-    cursor: pointer;
-    transition: box-shadow 0.5s ease;
-}
-.search input{
-    width: 70%;
-    border: none;
-    outline: none;
-    color: var(--color-text-primary);
-    background-color: #00000000;
-}
-.search:hover{
-    box-shadow: 0 0 0 1px var(--color-text-primary);
-}
-.search i{
-    font: 1.35rem;
-    color: var(--color-text-secondary);
-    margin: 0 0.5rem;
 }
 /*item-container*/
 .item-container{
@@ -255,51 +231,6 @@ main{
     padding: 1rem 0;
     box-shadow: 0 -0.2rem 0 0 var(--shadow-border);
 }
-.user{
-    display: flex;
-    overflow: hidden;
-    margin-top: 1rem;
-    font-size: 0.6rem;
-}
-.user-img{
-    display: flex;
-    align-items: center;
-    margin: 0 0.7rem 0 0;
-    border-radius: 50%;
-}
-.user-img img{
-    width: 2rem;
-    height: 2rem;
-    object-fit: cover;
-    border-radius: 50%;
-}
-.user-data{
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    white-space: nowrap;
-}
-.user-data .name{
-    font-weight: 600;
-    color: var(--color-text-primary);
-}
-.user-data .email{
-    font-size: 0.7rem;
-    color:var(--color-text-secondary)
-}
-.user-data .rol{
-    font-size: 0.7rem;
-    color: var(--color-text-secondary);
-}
-.user-icon{
-    cursor: pointer;
-    margin-left: auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.5rem;
-    color: var(--color-text-secondary);
-}
 /*Dark mode*/
 .dark-mode-btn{
     position: absolute;
@@ -322,15 +253,6 @@ main{
     font-size: 1.5rem;
     position: absolute;
     transition: transform 0.3s ease-in;
-}
-.dark-mode-btn i:last-child{
-    transform: translateY(150%);
-}
-.App.dark-mode .dark-mode-btn i:last-child{
-    transform: translateY(0%);
-}
-.App.dark-mode .dark-mode-btn i:first-child{
-    transform: translateY(-150%);
 }
 /*boton responsivo*/
 #sidebar-btn2{
