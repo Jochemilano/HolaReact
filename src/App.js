@@ -6,6 +6,7 @@ import Sidebar from './Sidebar';
 import DarkModeButton from './DarkModeButton';
 import Main from './Main';
 import Archivar from './archivar';
+import Papelera from './papelera';
 
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
@@ -19,6 +20,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/archive" element={<Archivar />} />
+            <Route path="/trash" element={<Papelera />} />
           </Routes>
           <DarkModeButton isDarkMode={isDarkMode} setIsDarkMode={setIsDarkMode} />
       </div>

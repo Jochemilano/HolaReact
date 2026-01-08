@@ -121,12 +121,23 @@
   border: none;
   font-size: 16px;
   cursor: pointer;
-  color: #555;
+  color: var(--color-text-secondary);
+  transition: color 0.2s;
+}
+.view-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: var(--color-text-secondary);
   transition: color 0.2s;
 }
 
 .edit-btn:hover {
   color: #2980b9;
+}
+.view-btn:hover {
+  color: #ffa200;
 }
 
 /* ================================
@@ -150,7 +161,7 @@
   margin-top: 10px;
 }
 
-.save-btn, .cancel-btn {
+.save-btn, .cancel-btn,.confirm-btn {
   flex: 1;
   padding: 6px;
   border: none;
@@ -167,12 +178,22 @@
 }
 
 .cancel-btn {
+  margin: 0 10px;
   background-color: #8b3a3a;
+  color: white;
+}
+.confirm-btn {
+  margin: 0 10px;
+  background-color: #7ca984;
   color: white;
 }
 
 .save-btn:hover {
   background-color: #2d4373;
+}
+
+.confirm-btn:hover {
+  background-color: #48614d;
 }
 
 .cancel-btn:hover {
@@ -250,3 +271,61 @@
 .App.dark-mode .note-card.variant-2 { background-color: #234a75; }
 .App.dark-mode .note-card.variant-3 { background-color: #2b5b8a; }
 .App.dark-mode .note-card.variant-4 { background-color: #1b2f4a; }
+
+/* ================================
+   Modal confrmacion
+================================ */
+
+
+
+/* ================================
+   Modal
+================================ */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  z-index: 1000;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.modal-content {
+  background: var(--color-bg);
+  padding: 20px;
+  border-radius: 12px;
+  max-width: 500px;
+  width: 100%;
+  max-height: 80vh;    /* limita la altura del modal */
+  overflow-y: auto;    /* scroll si es necesario */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* centra horizontalmente todo el contenido */
+  text-align: justify;  /* centra el texto dentro del div */
+  gap: 20px;           /* espacio entre nota y botón */
+}
+
+.view-text {
+  width: 100%;
+  word-wrap: break-word;  /* evita que palabras largas se salgan */
+}
+
+.close-btn {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  background-color: #007bff;
+  color: white;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.close-btn:hover {
+  background-color: #0056b3;
+}

@@ -12,6 +12,10 @@ function Main() {
   // Estados para manejar la edición
   const [editingIndex, setEditingIndex] = useState(null);
   const [editText, setEditText] = useState('');
+  const [viewNote, setViewNote] = useState(null);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [noteToDelete, setNoteToDelete] = useState(null);
+
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -31,8 +35,33 @@ function Main() {
     setNewNote('');
   };
 
-  const deleteNote = (index) => {
+const deleteNote = (index) => {
+    const noteToTrash = notes[index];
+    const trash = JSON.parse(localStorage.getItem('trash')) || [];
+    localStorage.setItem('trash', JSON.stringify([...trash, noteToTrash]));
     setNotes(notes.filter((_, i) => i !== index));
+  };
+
+  //Funciones para eliminar
+  const confirmDeleteNote = (index) => {
+    setNoteToDelete(index);
+    setShowConfirm(true);
+  };
+
+  const cancelDelete = () => {
+    setNoteToDelete(null);
+    setShowConfirm(false);
+  };
+
+  const acceptDelete = () => {
+    if (noteToDelete !== null) {
+      const noteToTrash = notes[noteToDelete];
+      const trash = JSON.parse(localStorage.getItem('trash')) || [];
+      localStorage.setItem('trash', JSON.stringify([...trash, noteToTrash]));
+      setNotes(notes.filter((_, i) => i !== noteToDelete));
+    }
+    setNoteToDelete(null);
+    setShowConfirm(false);
   };
 
   // Funciones para la edición
@@ -100,7 +129,12 @@ function Main() {
                   <p>{note.text}</p>
                 </div>
                 <div className="note-actions">
-                  
+                  <button
+                    className="view-btn"
+                    onClick={() => setViewNote(note.text)}
+                  >
+                    👁
+                  </button>
                   <button
                     className="edit-btn"
                     onClick={() => startEditing(index, note.text)}
@@ -109,7 +143,7 @@ function Main() {
                   </button>
                   <button
                     className="delete-btn"
-                    onClick={() => deleteNote(index)}
+                    onClick={() => confirmDeleteNote(index)}
                   >
                     ✕
                   </button>
@@ -119,6 +153,31 @@ function Main() {
           </div>
         ))}
       </div>
+      {/* Modal para ver nota */}
+      {viewNote && (
+        <div className="modal">
+          <div className="modal-content">
+            <div className="view-text">
+              {viewNote}
+            </div>
+            <button className="close-btn" onClick={() => setViewNote(null)}>Cerrar</button>
+          </div>
+        </div>
+      )}
+
+       {/* Confirmación para eliminar nota */}
+       {showConfirm && (
+        <div className="modal">
+          <div className="modal-content">
+            <p>¿Estás seguro de eliminar?</p>
+            <div className="modal-buttons">
+              <button className="cancel-btn" onClick={cancelDelete}>Cancelar</button>
+              <button className="confirm-btn" onClick={acceptDelete}>Aceptar</button>
+            </div>
+            <small>Puedes recuperar tus archivos eliminados en la papelera</small>
+          </div>
+        </div>
+      )}
     </main>
   );
 }
