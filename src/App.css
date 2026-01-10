@@ -127,6 +127,29 @@
   scrollbar-color: rgba(74, 144, 226, 0.5) transparent;
 }
 
+/* Textarea para editar nota en modal */
+.edit-textarea {
+  width: 100%;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  line-height: 1.5;
+  box-sizing: border-box;
+  background-color: #fefefe;
+  color: #333;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.edit-textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+
 /* ================================
    Grid de Notas
 ================================ */
@@ -402,6 +425,20 @@
 .App.dark-mode .note-form textarea::-webkit-scrollbar-thumb:hover,
 .App.dark-mode .modal-content::-webkit-scrollbar-thumb:hover {
   background-color: rgba(106, 169, 255, 0.8);
+}
+
+/* ================================
+   Editar Nota en Modo Oscuro
+================================ */
+.App.dark-mode .edit-textarea {
+  background-color: var(--user-bg-color); /* igual que textarea del formulario */
+  color: var(--color-text-primary);
+  border: 1px solid var(--color-border);
+}
+
+.App.dark-mode .edit-textarea:focus {
+  border-color: #6aa9ff;
+  box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.25);
 }
 
 /* ================================

@@ -10,12 +10,14 @@ function Main() {
   const [newNote, setNewNote] = useState('');
   
   // Estados para manejar la edición
+  const [editingNote, setEditingNote] = useState(null);
   const [editingIndex, setEditingIndex] = useState(null);
   const [editText, setEditText] = useState('');
+
+  // Estados para vistas y acciones
   const [viewNote, setViewNote] = useState(null);
   const [showConfirm, setShowConfirm] = useState(false);
   const [noteToDelete, setNoteToDelete] = useState(null);
-
 
   useEffect(() => {
     localStorage.setItem('notes', JSON.stringify(notes));
@@ -72,25 +74,28 @@ const archiveNote = (index) => {
   setNotes(notes.filter((_, i) => i !== index));
 };
   
-  // Funciones para la edición
+  // Funciones para la edición con modal
   const startEditing = (index, currentText) => {
-    setEditingIndex(index);
-    setEditText(currentText);
-  };
+  setEditingIndex(index);
+  setEditText(currentText);
+  setEditingNote(true);
+};
 
-  const cancelEditing = () => {
-    setEditingIndex(null);
-    setEditText('');
-  };
+const cancelEditing = () => {
+  setEditingNote(null);
+  setEditingIndex(null);
+  setEditText('');
+};
 
-  const saveEdit = (index) => {
-    if (editText.trim() === '') return;
-    const updatedNotes = [...notes];
-    updatedNotes[index].text = editText.trim();
-    setNotes(updatedNotes);
-    setEditingIndex(null);
-    setEditText('');
-  };
+const saveEdit = () => {
+  if (editText.trim() === '') return;
+
+  const updatedNotes = [...notes];
+  updatedNotes[editingIndex].text = editText.trim();
+  setNotes(updatedNotes);
+
+  cancelEditing();
+};
 
   return (
     <main className="Main">
@@ -115,27 +120,12 @@ const archiveNote = (index) => {
 
         {notes.map((note, index) => (
           <div key={index} className={`note-card ${note.variant}`}>
-            {editingIndex === index ? (
-              // Vista de edición
-              <div className="edit-container">
-                <input
-                  className="edit-input"
-                  type="text"
-                  value={editText}
-                  onChange={(e) => setEditText(e.target.value)}
-                  autoFocus
-                />
-                <div className="edit-buttons">
-                  <button className="save-btn" onClick={() => saveEdit(index)}>Guardar</button>
-                  <button className="cancel-btn" onClick={cancelEditing}>Cancelar</button>
-                </div>
-              </div>
-            ) : (
-              // Vista normal
-              <>
+
+              {/* --- VISTA NORMAL --- */}
                 <div className='note-text'>
                   <p>{note.text}</p>
                 </div>
+
                 <div className="note-actions">
                   <button
                     className="view-btn"
@@ -165,14 +155,12 @@ const archiveNote = (index) => {
                   >
                     ⤓
                   </button>
-
                 </div>
-              </>
-            )}
           </div>
         ))}
       </div>
-      {/* Modal para ver nota */}
+
+      {/* --- MODAL PARA VER NOTA --- */}
       {viewNote && (
         <div className="modal">
           <div className="modal-content">
@@ -183,8 +171,27 @@ const archiveNote = (index) => {
           </div>
         </div>
       )}
+      {/* --- MODAL PARA EDITAR NOTA --- */}
+      {editingNote && (
+        <div className="modal">
+          <div className="modal-content">
+            <h3>Editar nota</h3>
+            <textarea
+              className="edit-textarea"
+              value={editText}
+              onChange={(e) => setEditText(e.target.value)}
+              rows={6}
+              autoFocus
+            />
+            <div className="modal-buttons">
+              <button className="cancel-btn" onClick={cancelEditing}>Cancelar</button>
+              <button className="confirm-btn" onClick={saveEdit}>Guardar</button>
+            </div>
+          </div>
+        </div>
+      )}
 
-       {/* Confirmación para eliminar nota */}
+       {/* --- MODAL CONFIRMAR ELIMINAR --- */}
        {showConfirm && (
         <div className="modal">
           <div className="modal-content">
