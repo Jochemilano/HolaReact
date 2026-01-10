@@ -64,6 +64,14 @@ const deleteNote = (index) => {
     setShowConfirm(false);
   };
 
+  //Funciones para archivar
+const archiveNote = (index) => {
+  const noteToArchive = notes[index];
+  const archive = JSON.parse(localStorage.getItem('archive')) || [];
+  localStorage.setItem('archive', JSON.stringify([...archive, noteToArchive]));
+  setNotes(notes.filter((_, i) => i !== index));
+};
+  
   // Funciones para la edición
   const startEditing = (index, currentText) => {
     setEditingIndex(index);
@@ -91,12 +99,12 @@ const deleteNote = (index) => {
       </header>
 
       <div className="note-form">
-        <input
-          type="text"
+        <textarea
           value={newNote}
           onChange={(e) => setNewNote(e.target.value)}
-          placeholder="Escribe una nota..."
-        />
+          placeholder="Escribe tu nota aquí..."
+          rows={3}
+          />
         <button onClick={addNote}>Agregar</button>
       </div>
 
@@ -150,6 +158,14 @@ const deleteNote = (index) => {
                   >
                     ✕
                   </button>
+                  <button
+                    className="archive-btn"
+                    onClick={() => archiveNote(index)}
+                    title="Archivar"
+                  >
+                    ⤓
+                  </button>
+
                 </div>
               </>
             )}

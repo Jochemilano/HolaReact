@@ -29,15 +29,28 @@
   margin-bottom: 20px;
 }
 
-.note-form input {
+.note-form textarea {
   width: 400px;
-  padding: 10px;
-  border-radius: 8px;
+  padding: 12px;
+  border-radius: 10px;
   border: 1px solid #ccc;
-  font-size: 16px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+  line-height: 1.5;
 }
 
-.note-form input,
+.note-form textarea:focus {
+  outline: none;
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
+}
+
+.note-form textarea::placeholder {
+  color: #999;
+}
+
+.note-form textarea,
 .note-form button,
 .note-card {
   transition: background-color 0.5s ease, color 0.5s ease, border 0.5s ease, box-shadow 0.5s ease;
@@ -56,6 +69,62 @@
 
 .note-form button:hover {
   background-color: #357ab8;
+}
+
+
+/* ================================
+   Scrollbar del textarea
+================================ */
+.note-form textarea::-webkit-scrollbar {
+  width: 8px;
+}
+
+.note-form textarea::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.note-form textarea::-webkit-scrollbar-thumb {
+  background-color: rgba(74, 144, 226, 0.5);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.note-form textarea::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(74, 144, 226, 0.8);
+}
+
+/* Firefox */
+.note-form textarea {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 144, 226, 0.5) transparent;
+}
+
+/* ================================
+   Scrollbar para modal de vista
+================================ */
+
+.modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(74, 144, 226, 0.5);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(74, 144, 226, 0.8);
+}
+
+/* Firefox */
+.modal-content {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(74, 144, 226, 0.5) transparent;
 }
 
 /* ================================
@@ -83,8 +152,8 @@
   text-overflow: ellipsis;
 }
 
-.note-card p {
-  margin: 0;
+.note-text p {
+  margin: 0 0 8px 0; /* espacio entre párrafos */
   white-space: pre-wrap;
 }
 
@@ -139,6 +208,20 @@
 .view-btn:hover {
   color: #ffa200;
 }
+
+.archive-btn {
+  background: none;
+  border: none;
+  font-size: 16px;
+  cursor: pointer;
+  color: #555;
+  transition: color 0.2s;
+}
+
+.archive-btn:hover {
+  color: #6c12f3;
+}
+
 
 /* ================================
    Edición de Notas
@@ -221,10 +304,19 @@
   color: var(--color-text-primary);
 }
 
-.App.dark-mode .note-form input {
+.App.dark-mode .note-form textarea {
   background-color: var(--user-bg-color);
   color: var(--color-text-primary);
   border: 1px solid var(--color-border);
+}
+
+.App.dark-mode .note-form textarea:focus {
+  border-color: #6aa9ff;
+  box-shadow: 0 0 0 2px rgba(106, 169, 255, 0.25);
+}
+
+.App.dark-mode .note-form textarea::placeholder {
+  color: var(--color-text-secondary);
 }
 
 .App.dark-mode .note-form button {
@@ -264,6 +356,14 @@
   opacity: 0.9;
 }
 
+.App.dark-mode .archive-btn {
+  color: var(--color-text-secondary);
+}
+
+.App.dark-mode .archive-btn:hover {
+  color: #52209d;
+}
+
 /* ================================
    Variantes de Notas (Modo Oscuro)
 ================================ */
@@ -273,10 +373,36 @@
 .App.dark-mode .note-card.variant-4 { background-color: #1b2f4a; }
 
 /* ================================
-   Modal confrmacion
+   Scrollbars Modo Oscuro
 ================================ */
+.App.dark-mode .note-form textarea,
+.App.dark-mode .modal-content {
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: rgba(106, 169, 255, 0.5) transparent; /* Firefox */
+}
 
+/* Chrome, Edge, Safari */
+.App.dark-mode .note-form textarea::-webkit-scrollbar,
+.App.dark-mode .modal-content::-webkit-scrollbar {
+  width: 8px;
+}
 
+.App.dark-mode .note-form textarea::-webkit-scrollbar-track,
+.App.dark-mode .modal-content::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.App.dark-mode .note-form textarea::-webkit-scrollbar-thumb,
+.App.dark-mode .modal-content::-webkit-scrollbar-thumb {
+  background-color: rgba(106, 169, 255, 0.5);
+  border-radius: 10px;
+  transition: background-color 0.3s;
+}
+
+.App.dark-mode .note-form textarea::-webkit-scrollbar-thumb:hover,
+.App.dark-mode .modal-content::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(106, 169, 255, 0.8);
+}
 
 /* ================================
    Modal
@@ -313,7 +439,8 @@
 
 .view-text {
   width: 100%;
-  word-wrap: break-word;  /* evita que palabras largas se salgan */
+  word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 .close-btn {
