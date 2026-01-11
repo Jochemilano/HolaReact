@@ -164,13 +164,21 @@ const saveEdit = () => {
       {viewNote && (
         <div className="modal">
           <div className="modal-content">
-            <div className="view-text">
-              {viewNote}
-            </div>
-            <button className="close-btn" onClick={() => setViewNote(null)}>Cerrar</button>
-          </div>
-        </div>
-      )}
+  <button
+    className="close-btn close-top"
+    onClick={() => setViewNote(null)}
+    title="Cerrar"
+  >
+    ✕
+  </button>
+
+  <div className="view-text">
+    {viewNote}
+  </div>
+</div>
+</div>
+ )}
+      
       {/* --- MODAL PARA EDITAR NOTA --- */}
       {editingNote && (
         <div className="modal">

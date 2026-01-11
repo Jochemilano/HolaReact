@@ -472,6 +472,28 @@
   align-items: center; /* centra horizontalmente todo el contenido */
   text-align: justify;  /* centra el texto dentro del div */
   gap: 20px;           /* espacio entre nota y botón */
+  position: relative;
+}
+
+/* Botón cerrar del modal (arriba a la derecha) */
+.close-top {
+  position: sticky;
+  top: 0;
+  align-self: flex-end;
+  background-color: rgba(0, 0, 0, 0.08); /* circulito visible siempre */
+  color: #444;
+  font-size: 20px;
+  padding: 6px 10px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+  z-index: 10;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.close-top:hover {
+  background-color: rgba(0, 0, 0, 0.18);
+  color: #000;
 }
 
 .view-text {
@@ -480,16 +502,12 @@
   white-space: pre-wrap;
 }
 
-.close-btn {
-  padding: 8px 16px;
-  border: none;
-  border-radius: 8px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
-  font-weight: bold;
+/* Botón cerrar (modo oscuro) */
+.App.dark-mode .close-top {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: var(--color-text-primary);
 }
 
-.close-btn:hover {
-  background-color: #0056b3;
+.App.dark-mode .close-top:hover {
+  background-color: rgba(255, 255, 255, 0.28);
 }
