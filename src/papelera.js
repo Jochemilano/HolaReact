@@ -74,11 +74,10 @@ function Papelera() {
       {viewNote && (
         <div className="modal">
           <div className="modal-content">
-            <div className="view-text">
-              {viewNote}
-            </div>
-            <button className="close-btn" onClick={() => setViewNote(null)}>Cerrar</button>
-          </div>
+  <button className="close-top" onClick={() => setViewNote(null)}>✕</button>
+  <div className="view-text">{viewNote}</div>
+</div>
+
         </div>
       )}
     </main>

@@ -146,7 +146,7 @@ const saveEdit = () => {
                     onClick={() => confirmDeleteNote(index)}
                     title="Mandar a papelera"
                   >
-                    ✕
+                    🗑
                   </button>
                   <button
                     className="archive-btn"
