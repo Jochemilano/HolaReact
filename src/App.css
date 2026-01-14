@@ -30,6 +30,9 @@
 }
 
 .note-form textarea {
+  min-height: 46px;
+  height: 46px;
+  max-height: 200px;
   width: 400px;
   padding: 12px;
   border-radius: 10px;
@@ -41,6 +44,8 @@
 }
 
 .note-form textarea:focus {
+  min-height: 46px;
+  max-height: 200px;
   outline: none;
   border-color: #4a90e2;
   box-shadow: 0 0 0 2px rgba(74, 144, 226, 0.2);
